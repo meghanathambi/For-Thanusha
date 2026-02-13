@@ -36,8 +36,14 @@ body {
     min-height: 120px;
 }
 
-img {
+.photo-container {
+    margin-top: 20px;
+}
+
+.photo-container img {
     width: 220px;
+    height: 280px;
+    object-fit: cover;
     border-radius: 20px;
     margin: 15px;
     box-shadow: 0 0 20px rgba(255,78,138,0.6);
@@ -73,12 +79,6 @@ button {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-100vh); opacity: 0; }
 }
-
-#countdown {
-    font-size: 22px;
-    margin-top: 20px;
-    color: #fff;
-}
 </style>
 </head>
 
@@ -91,22 +91,20 @@ button {
 <h1 id="herName"></h1>
 <div id="message"></div>
 
-<div>
-    <img src="photo1.jpg">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
+<div class="photo-container">
+    <img src="photo1.jpg" alt="Memory 1">
+    <img src="photo2.jpg" alt="Memory 2">
+    <img src="photo3.jpg" alt="Memory 3">
 </div>
 
 <h2>Will You Be Mine Forever? 💍</h2>
-
-<div id="countdown"></div>
 
 <button id="yesBtn">YES ❤️</button>
 <button id="noBtn">NO 😜</button>
 
 <script>
 
-// 🔐 PASSWORD PROTECTION
+// 🔐 PASSWORD
 let password = prompt("Enter our secret word ❤️");
 
 if(password === null || password.trim() !== "I LOVE YOU MAA"){
@@ -115,18 +113,17 @@ if(password === null || password.trim() !== "I LOVE YOU MAA"){
 
     alert("Welcome My Love ❤️");
 
-    // 🎵 AUTO PLAY WITH SMOOTH FADE-IN
     let music = document.getElementById("bgMusic");
-    music.volume = 0;
-    music.play().catch(()=>{});
 
-    let fade = setInterval(function() {
-        if (music.volume < 1) {
-            music.volume = Math.min(music.volume + 0.02, 1);
-        } else {
-            clearInterval(fade);
-        }
-    }, 200);
+    // Try autoplay
+    music.volume = 0.5;
+    music.play().catch(() => {
+        // If blocked, play on first click
+        document.addEventListener("click", function playMusic() {
+            music.play();
+            document.removeEventListener("click", playMusic);
+        });
+    });
 }
 
 // 💕 NAME TYPING
@@ -142,7 +139,7 @@ function typeName() {
 }
 typeName();
 
-// 💌 LOVE MESSAGE
+// 💌 MESSAGE
 let text = "From our very first bus journey — it was such a beautiful journey that I will never forget. Every smile, every conversation, every small moment with you felt magical. Thanush, you are my peace, my happiness, my forever. ❤️";
 let i = 0;
 
@@ -174,7 +171,7 @@ function createHeart() {
 }
 setInterval(createHeart, 300);
 
-// 🎉 YES BUTTON SURPRISE
+// 🎉 YES SURPRISE
 document.getElementById("yesBtn").addEventListener("click", function() {
     document.body.innerHTML = `
         <h1 style='margin-top:200px;font-size:50px;color:#ff4e8a;'>
@@ -183,23 +180,6 @@ document.getElementById("yesBtn").addEventListener("click", function() {
         <h2>I Love You Forever Thanush ❤️</h2>
     `;
 });
-
-// ⏳ ANNIVERSARY COUNTDOWN (Edit Date If Needed)
-let anniversary = new Date("March 1, 2026 00:00:00").getTime();
-
-setInterval(function() {
-    let now = new Date().getTime();
-    let distance = anniversary - now;
-
-    if(distance > 0){
-        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-        document.getElementById("countdown").innerHTML =
-        "Our Special Day in: " + days + "d " + hours + "h " + minutes + "m ❤️";
-    }
-}, 1000);
 
 </script>
 
