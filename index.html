@@ -24,34 +24,40 @@ body {
 
 #herName {
     margin-top: 60px;
-    font-size: 45px;
+    font-size: 50px;
     color: #ff4e8a;
     letter-spacing: 3px;
 }
 
 #message {
-    width: 70%;
+    width: 75%;
     margin: 30px auto;
-    font-size: 20px;
+    font-size: 22px;
     min-height: 120px;
 }
 
+/* 💕 BIGGER IMAGES */
 .photo-container {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .photo-container img {
-    width: 220px;
-    height: 280px;
+    width: 300px;          /* increased size */
+    height: 380px;
     object-fit: cover;
-    border-radius: 20px;
-    margin: 15px;
-    box-shadow: 0 0 20px rgba(255,78,138,0.6);
+    border-radius: 25px;
+    margin: 20px;
+    box-shadow: 0 0 25px rgba(255,78,138,0.8);
+    transition: transform 0.3s ease;
+}
+
+.photo-container img:hover {
+    transform: scale(1.08);
 }
 
 button {
     padding: 15px 30px;
-    font-size: 18px;
+    font-size: 20px;
     border: none;
     border-radius: 30px;
     margin: 20px;
@@ -92,9 +98,9 @@ button {
 <div id="message"></div>
 
 <div class="photo-container">
-    <img src="photo1.jpg" alt="Memory 1">
-    <img src="photo2.jpg" alt="Memory 2">
-    <img src="photo3.jpg" alt="Memory 3">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
 </div>
 
 <h2>Will You Be Mine Forever? 💍</h2>
@@ -115,15 +121,14 @@ if(password === null || password.trim() !== "I LOVE YOU MAA"){
 
     let music = document.getElementById("bgMusic");
 
-    // Try autoplay
-    music.volume = 0.5;
-    music.play().catch(() => {
-        // If blocked, play on first click
-        document.addEventListener("click", function playMusic() {
-            music.play();
-            document.removeEventListener("click", playMusic);
-        });
-    });
+    // ✅ 100% Reliable Music Start
+    function startMusic() {
+        music.volume = 0.6;
+        music.play();
+        document.removeEventListener("click", startMusic);
+    }
+
+    document.addEventListener("click", startMusic);
 }
 
 // 💕 NAME TYPING
@@ -134,7 +139,7 @@ function typeName() {
     if (index < herName.length) {
         document.getElementById("herName").innerHTML += herName.charAt(index);
         index++;
-        setTimeout(typeName, 150);
+        setTimeout(typeName, 120);
     }
 }
 typeName();
@@ -147,7 +152,7 @@ function typeMessage() {
     if (i < text.length) {
         document.getElementById("message").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeMessage, 40);
+        setTimeout(typeMessage, 35);
     }
 }
 setTimeout(typeMessage, 2000);
@@ -155,8 +160,8 @@ setTimeout(typeMessage, 2000);
 // 😄 RUNNING NO BUTTON
 let noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", function() {
-    noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
-    noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
+    noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
 });
 
 // ❤️ FLOATING HEARTS
@@ -174,10 +179,10 @@ setInterval(createHeart, 300);
 // 🎉 YES SURPRISE
 document.getElementById("yesBtn").addEventListener("click", function() {
     document.body.innerHTML = `
-        <h1 style='margin-top:200px;font-size:50px;color:#ff4e8a;'>
-        She Said YES ❤️💍
+        <h1 style='margin-top:200px;font-size:60px;color:#ff4e8a;'>
+        She Said YES ❤️💕💍
         </h1>
-        <h2>I Love You Forever Thanush ❤️</h2>
+        <h2 style="font-size:30px;">I Love You Forever Thanush ❤️ Miss You🥺🫶 </h2>
     `;
 });
 
